@@ -4,6 +4,7 @@
 <div  class="main-container">
 <Nav class="nav-bar"></Nav>
 <router-view class="main-content"></router-view>
+
 </div>
 
 </template>
@@ -14,7 +15,10 @@
     import Nav from './components/Navbar.vue';
     export default{
         computed:{
-            
+            coins(){
+            return this.$store.getters['crypto/getCoins'];
+
+            }
         },
         components:{
             Nav,
@@ -25,6 +29,8 @@
         },
         methods:{
             async loadCoins(){
+                console.log('appvue');
+                
                 try{
                     const response = await fetch ('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false');
                     const responseData = await response.json();

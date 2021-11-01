@@ -24,12 +24,12 @@
         }
     }
 </script>
-<style scoped>
+<style>
 
     .allHead{
         display: flex;
         justify-content: space-around;
-        align-items: center;
+        /* align-items: center; */
         padding: 2rem;
     }
     .dashHead{
@@ -54,7 +54,8 @@
 
 .search input:focus {
     box-shadow: none;
-    border: 2px solid blue
+    border: 2px solid gray;
+    background-color: black;
 
 }
 

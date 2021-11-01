@@ -1,8 +1,11 @@
 <template>
      <div id="mySidebar" class="sidebar" :class="{'decreasedWidth':mini,'increasedWidth':!mini}" @mouseover="toggleSidebar()"  @mouseout="toggleSidebar()">
         <router-link to="/home" :class="{'miniLink':mini,'link':!mini}" href="#"><span><i class="material-icons">dashboard</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</span></span></router-link><br>
-        <a href="#"><span><i class="material-icons">monetization_on</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Prices</span></span></a><br>
+        <router-link to="/prices"><span><i class="material-icons">monetization_on</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Prices</span></span></router-link><br>
         <router-link to="/setAlert"><span><i class="material-icons">spa</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Set Alert</span></span>
+        </router-link><br>
+        
+        <router-link to="/news"><span><i class="material-icons">article</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Crypto News</span></span>
         </router-link><br>
         
     </div>

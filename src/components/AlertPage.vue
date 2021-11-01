@@ -71,51 +71,49 @@
                     <h6 @click="percentClicked()" :class="{'bgBlue':!radioValue}">By Percentage</h6>
                 </div>
                 
-                <form @submit.prevent="">
+                <form @submit.prevent="submitForm()">
                     <div class="d-flex justify-content-between" style="">
                         <div style="display:inline">
                             <label for="firstName"> First Name</label>
-                            <input type="text" id="firstName" class="text-line">
+                            <input type="text" id="firstName" class="text-line" v-model="firstName">
                         </div>
                         <div>
                             <label for="lastName"> Last Name</label>
-                            <input type="text" id="lastName" class="text-line">
+                            <input type="text" id="lastName" class="text-line" v-model="lastName">
                         </div>
                     </div>
                     <div>
                         <label for="email">Your Email</label>
-                        <input type="email" name="email" id="email" class="text-line" style="width:100%">
+                        <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="email">
                     </div>
                     <div>
                         <label for="coin">Your Crypto Currency</label>
-                        <select name="coin" id="coin" class="text-line" style="width:100% ">
+                        <select name="coin" id="coin" class="text-line" style="width:100% " v-model="cryptoCoin">
                             <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.name">{{coins.name}}</option>
                         </select>
                     </div>
                     <div v-if="radioValue">
                         <label for="variationPrice">Price goes:</label>
-                        <select name="variation" id="variationPrice" class="text-line" style="width:100%">
+                        <select name="variation" id="variationPrice" class="text-line" style="width:100%" v-model="price">
                             <option value="above"> Above</option>
                             <option value="below">Below</option>
-                            <option value="change">Changes</option>
                         </select>
                     </div>
                     <div v-else>
                         <label for="variationPercent">Percentage goes:</label>
-                        <select name="variation" id="variationPercent" class="text-line" style="width:100%">
+                        <select name="variation" id="variationPercent" class="text-line" style="width:100%" v-model="percentage">
                             <option value="above"> Above</option>
                             <option value="below">Below</option>
-                            <option value="change">Changes</option>
                         </select>
                     </div>
 
                     <div v-if="radioValue">
                         <label for="price">Critical Value</label>
-                        <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%">
+                        <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%" v-model="criticalValuePrice">
                     </div>
                     <div v-else>
                         <label for="percent">Critical Value</label>
-                        <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%">
+                        <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
                     </div>
                     <button type="submit" class="submitButton">Submit</button>
                 </form>
@@ -138,7 +136,15 @@ export default {
                 userId:'',
 
             },
-                radioValue:true
+                radioValue:true,
+                firstName:'',
+                lastName:'',
+                email:'',
+                cryptoCoin:'',
+                price:'',
+                criticalValuePrice:'',
+                percentage:'',
+                criticalValuePercent:''
 
         }
     },
@@ -158,6 +164,20 @@ export default {
         percentClicked(){
             this.radioValue = false;
             console.log('percent');
+            
+        },
+        submitForm(){
+            const formData = {
+                name : this.firstName + " " + this.lastName,
+                email:this.email,
+                cryptoCoin:this.cryptoCoin,
+                price:this.price,
+                criticalValuePrice : this.criticalValuePrice,
+                percentage:this.percentage,
+                criticalValuePercent:this.criticalValuePercent
+            }
+            console.log(formData);
+            
             
         }
 
