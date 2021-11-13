@@ -25,10 +25,12 @@
         methods:{
             toggleSidebar() {
                 console.log('hello');
+                    this.$emit('mini');
                 
                 if (this.mini) {
                     
                     this.mini = false;
+                    
                     // this.$store.commit('dash/changeMini',{value:this.mini});
                     
                 } else {
@@ -37,11 +39,12 @@
                     // this.$store.commit('dash/changeMini',{value:this.mini});
                 }
             }
-        }
+        },
+        emits:['mini']
     }
 </script>
 <style scoped>
-body {
+        body {
             font-family: "Lato", sans-serif;
         }
         .link{
@@ -61,6 +64,7 @@ body {
             padding-top: 25px;
             white-space: nowrap;
             overflow-y: hidden  ;
+            position: fixed;
         }
         
         .sidebar a {
@@ -101,12 +105,8 @@ body {
         .increasedWidth{
             width: 250px;
         }
-        .increasedMargin{
-        }
         .decreasedWidth{
             width: 80px;
-        }
-        .decreasedMargin{
         }
         /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
         

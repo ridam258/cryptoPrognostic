@@ -9,56 +9,6 @@
                 <img src="../assets/crypto2.jpg" alt="">
             </div>
         </div>
-        <!-- <div class="formHead">
-            <h3>Submit The Form!</h3>
-            <div class="d-flex justify-content-around">
-                
-            </div>
-            <form v-if="false">
-                <div class="d-flex justify-content-center">
-                    <h4 style="display:inline">Send me an Email as soon as</h4>
-                    <select id="cryptoCoins" name="coins" class="coinsDropDown">
-                        <option v-for="coins in loadedCoins" :key="coins.name" class="dropdownOption"> {{coins.name}}</option>
-                    </select>
-                <h4 style="display:inline">goes</h4>
-                </div>
-                <div class="d-flex justify-content-center my-2">
-                    <select id="aboveBelow" name="hl" class="aboveBelow coinsDropDown">
-                        <option > Above</option>
-                        <option > Below</option>
-                        <option > Changed</option>  
-                    </select>
-                    <h4>the price of</h4>
-                    <input type="text" style="margin: 0 2rem" placeholder="0.00">
-                    <h4>INR</h4>
-                </div>
-                
-            </form>
-            <div v-else class="d-flex">
-                <form style="flex:2">
-                <label for="email">Your email id:</label>
-                <input type="email" name="email" id="email" class="coinsDropDown">
-                <br>
-                <label for="cryptoCoins">Choose your CryptoCurrency</label>
-                <select id="cryptoCoins" name="coins" class="coinsDropDown">
-                        <option v-for="coins in loadedCoins" :key="coins.name" class="dropdownOption"> {{coins.name}}</option>
-                </select>
-                <br>
-                <label for="variation">Price goes:</label>
-                <select name="variation" id="variation" class="coinsDropDown">
-                    <option value="above"> Above</option>
-                    <option value="below">Below</option>
-                    <option value="change">Changes</option>
-                </select>
-                <br>
-                <label for="price">Critical Value</label>
-                <input type="text" style="margin: 0 2rem" id="price" placeholder="0.00" class="coinsDropDown">
-                <label for="price">INR</label>
-                </form>
-                
-            </div>
-            
-        </div> -->
         <div class="d-flex formParent">
             <div class="formLeft">
                 <h3>Get a profit alert every time and trace your crypto currency just right!</h3>
@@ -126,7 +76,7 @@
 
 <script>
     import axios from 'axios';
-    import APIURl from '../variable.js'
+    // import APIURl from '../variable.js'
 export default {
     data(){
         return{
@@ -149,13 +99,7 @@ export default {
         }
     },
     methods:{
-        submitData(){
-            axios.post(APIURl['base-url'],this.formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
-            axios.get('http://localhost:3000/').then((res)=>{
-                console.log(res);
-                
-            })
-        },
+
         priceClicked(){
             this.radioValue = true;
             console.log('price');
@@ -168,7 +112,8 @@ export default {
         },
         submitForm(){
             const formData = {
-                name : this.firstName + " " + this.lastName,
+                firstName : this.firstName ,
+                lastName : this.lastName,
                 email:this.email,
                 cryptoCoin:this.cryptoCoin,
                 price:this.price,
@@ -178,7 +123,7 @@ export default {
             }
             console.log(formData);
             
-            
+            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
         }
 
         

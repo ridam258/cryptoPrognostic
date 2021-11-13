@@ -92,7 +92,6 @@ export default {
                             symbol: crypto.symbol.toUpperCase()
                         }
                         this.mainCoins.push(coin);
-                        console.log(coin);
                         
                         // console.log(this.loadedCoins);
                         

@@ -2,8 +2,8 @@
 
 <!-- <the-header :class="{'lessMargin':!sidebarOpen,'moreMargin':sidebarOpen}" class="top-header"></the-header> -->
 <div  class="main-container">
-<Nav class="nav-bar"></Nav>
-<router-view class="main-content"></router-view>
+<Nav class="nav-bar" @mini="mini"></Nav>
+<router-view :class="{'lessMargin':!active,'moreMargin':active}" class="main-content"></router-view>
 
 </div>
 
@@ -14,6 +14,11 @@
     // import TheHeader from './components/TheHeader.vue';
     import Nav from './components/Navbar.vue';
     export default{
+        data(){
+            return{
+                active:false
+            }
+        },
         computed:{
             coins(){
             return this.$store.getters['crypto/getCoins'];
@@ -26,6 +31,8 @@
         },
         created(){
             this.loadCoins();
+            console.log(this.active);
+            
         },
         methods:{
             async loadCoins(){
@@ -41,6 +48,9 @@
                     
                 }
             },
+            mini(){
+                this.active=!this.active;
+            }
         }
     }
 </script>
@@ -59,11 +69,14 @@
         /* flex: 15%; */
         color: white;
         background-color: #111;
+        /* position: fixed; */
     }
     .main-content{
         flex: 70%;
         color: white;
+        margin-left: 85px;
         background-color: #171717;
+        transition: .5s;
     }
     .lessMargin{
         margin-left: 85px;

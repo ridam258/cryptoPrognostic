@@ -27,6 +27,7 @@ export default {
     p{
         font-size: .8rem;
         margin: 0; 
+        color: rgb(177, 177, 177);
         font-family: 'Lato', sans-serif;
 
     }
@@ -36,6 +37,7 @@ export default {
     }
     h6{
         font-family: 'Lato', sans-serif;
+        color: rgb(177, 177, 177);
         font-size: 1.2rem;
     }
     h4{

@@ -5,6 +5,7 @@ export default{
         const cryptoList = [];
         for (const crypto of payload){
             const coin = {
+                id:crypto.id,
                 name : crypto.name,
                 image : crypto.image,
                 price : crypto.current_price,

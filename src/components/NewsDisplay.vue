@@ -8,29 +8,6 @@
         
         </div>
         <div class="news">
-            <!-- <div class="d-flex justify-content-around">
-            <div class="card">
-                <div class="d-flex">
-                    <div>
-                        <h3>Satoshi Nakamoto’s Bitcoin white paper is now a 13-year-old teenager</h3>
-                        <div class="d-flex justify-content-between">
-                            <h5>Cointelegraph By Arijit Sarkar</h5>
-                            <h5>2021-10-31</h5>
-                        </div>
-                        
-                    </div>
-                    <img style="width:250px" src="https://images.cointelegraph.com/images/1200_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjEtMTAvY2E4ODlkMTktYjM0NC00MmM2LWI4OWYtNzQ1ZjUyNThjYTNhLmpwZw==.jpg" alt="">
-                </div>
-                <div>
-                    <h4 style="text-align:center;padding:1rem 0">Description</h4>
-                    <p>Today, Bitcoin maintains a stable trading value well above $60k after experiencing a gradual appreciation of 7,749,999,900% ever since its launch.</p>
-                </div>
-                <button class="buttonStyle">View More</button>
-            </div>
-            <div class="card">
-                <h3>Satoshi Nakamoto’s Bitcoin white paper is now a 13-year-old teenager</h3>
-            </div>
-            </div> -->
             <div class="newsChild">
                 <div class="firstNews d-flex">
                     <div style="">
@@ -195,12 +172,14 @@ finalArray:[]
     } */
     h6 {
         font-family: 'Lato', sans-serif;
+        color: rgb(177, 177, 177);
         font-size: 1.2rem;
     }
     .news p{
         font-family: 'Lato', sans-serif;
         margin: 0;
         font-size: .8rem;
+        color: rgb(177, 177, 177);
     }
     h2{
         font-weight: 600;
