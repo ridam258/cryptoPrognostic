@@ -13,16 +13,16 @@
         <div class="news">
             <div class="newsChild">
                 <div class="firstNews d-flex">
-                    <div style="">
-                        <img style="width:90%; margin:auto;" src="https://images.cointelegraph.com/images/1200_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjEtMTAvY2E4ODlkMTktYjM0NC00MmM2LWI4OWYtNzQ1ZjUyNThjYTNhLmpwZw==.jpg" alt="">
+                    <div style="flex:1">
+                        <img style=" margin:auto; object-fit:contain; height:100%; width:100%" :src="array.media" alt="">
                     </div>
-                    <div class="firstNewsContent">
-                        <p>{{array.publishedAt}}</p>
-                        <a :href="array.url"><h1 >{{array.title}}</h1></a>
-                        <h6>
-                            {{array.description}}
+                    <div class="firstNewsContent mx-3" style="flex:2">
+                        <p>{{array.published_date}}</p>
+                        <a :href="array.link"><h1 class="mx-0">{{array.title}}</h1></a>
+                        <h6 style="height:13vh;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;">
+                            {{array.summary}}
                         </h6>
-                        <p>{{array.author}}</p>
+                        <p>{{array.rights}}</p>
                     </div>
                 </div>
                 <div class="grid-container">         
@@ -36,6 +36,7 @@
 </template>
 <script>
 import GridView from './GridView.vue';
+// import axios from 'axios';
 export default {
     components:{
         GridView
@@ -49,16 +50,24 @@ export default {
     },
     methods:{
         async loadnews(){
-            this.loaderactive++;
-            const res = await fetch('https://newsapi.org/v2/everything?q=crypto&sortBy=publishedAt&language=en&apiKey=6c3d5f8fac27421ea3c5222aff2c2c1a');
-            const responseData =await res.json();
-            console.log(responseData);
-            
+            const response = await fetch("https://free-news.p.rapidapi.com/v1/search?q=crypto&lang=en", {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "free-news.p.rapidapi.com",
+                    "x-rapidapi-key": "4dc18bf43dmsh45053a7a226c5e8p13b081jsnfe85eacf3860"
+                }
+            });
+            const responseData = await response.json();
+            console.log(responseData.articles);
             this.array = responseData.articles[0];
-            let temp = [...responseData.articles];
+            let temp = responseData.articles;
             temp.splice(0,1);
-            this.finalArray = temp;
-            this.loaderactive--;
+            this.finalArray = [...temp];
+            console.log(this.finalArray);
+            
+            
+            
+            
         }
     },
     created(){
