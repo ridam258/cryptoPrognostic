@@ -39,7 +39,7 @@
                     <div>
                         <label for="coin">Your Crypto Currency</label>
                         <select name="coin" id="coin" class="text-line" style="width:100% " v-model="cryptoCoin">
-                            <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.name">{{coins.name}}</option>
+                            <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.id">{{coins.name}}</option>
                         </select>
                     </div>
                     <div v-if="radioValue">

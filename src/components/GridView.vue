@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <div >
             <img :src="trend.urlToImage" alt="">
         </div>
@@ -19,6 +19,10 @@ export default {
 }
 </script>
 <style scoped>
+    /* .main:hover{
+        transform: scale(1.1);
+        transition: .5s;
+    } */
     img{
         width:100%;
         height: 200px;

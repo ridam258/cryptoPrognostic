@@ -1,80 +1,58 @@
 <template>
+<div v-if="loaderactive!=0" style="height:100vh" class="d-flex justify-content-center align-items-center">
+        <vue-loaders name="ball-scale-multiple" color="lightgray" scale="2"></vue-loaders>
+      </div>
+<div v-else>
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+    <coin-detail :selected="selectedCoin"></coin-detail>
     <div class="topMost">
         <div class="allHead align-items-center">
         <div class="dashHead">
             <h2 class="m-0">Current Price</h2>
         </div>
         <div class="searchHead">
-            <div class="search"> <i class="fa fa-search"></i><input v-model="searchingString" type="text" class="form-control" placeholder="Search for Crypto ">  </div>
+            <div class="search"> <i class="fa fa-search"></i><input v-model="searchingString" style="color:white" type="text" class="form-control" placeholder="Search for Crypto ">  </div>
         </div>
         </div>
         <!-- <h1 style="display:none">{{loadedCoins2}}</h1> -->
         <div>
-            <!-- <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">24h%</th>
-                    <th scope="col">Market Cap</th>
-                    <th scope="col">Volume(24h)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="coins in loadedCoins" :key="coins.name">
-                    <th scope="row">{{coins.rank}}</th>
-                    <td><img style="width:22px; margin: 0 5px; background-color:white" :src="coins.image" alt="">{{coins.name}} <p style="color:#aaa; display:inline; margin:0 5px">{{coins.symbol}}</p></td>
-                    <td>₹{{coins.price}}</td>
-                    <td :class="{'red':coins.percent<0,'lightgreen': coins.percent>=0}">{{coins.percent}}</td>
-                    <td>₹{{coins.market_cap}}</td>
-                    <td>₹{{coins.volume}} <p style=" display:inline; margin:0 5px">{{coins.symbol}}</p></td>
-                    </tr>
-                </tbody>
-            </table> -->
             <div class="grid-container">         
-                <div class="grid-item  is-justify-content-space-between" v-for="coin in loadedCoins" :key="coin.name">
+                <div class="grid-item  is-justify-content-space-between " data-bs-toggle="modal" data-bs-target="#exampleModal"  v-for="coin in loadedCoins" :key="coin.name" @click="openModal(coin)">
                     <price-grid :coin='coin'></price-grid>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
 import PriceGrid from './PriceGrid.vue';
+import CoinDetail from './CoinDetail.vue';
 export default {
     components:{
-        PriceGrid
+        PriceGrid,
+        CoinDetail
     },
     data(){
         return{
+            loaderactive:0,
             loadedCoins:[],
             mainCoins:[],
-            searchingString:''
+            searchingString:'',
+            selectedCoin:{}
         }
     },
     computed:{
-        // loadedCoins(){
-        //     return this.$store.getters['crypto/getCoins'];
-        // }
     },
     created(){
-        // if(localStorage.getItem('coins')){
-        //     console.log(JSON.parse(localStorage.getItem('coins')));
-            
-        //     this.loadedCoins = JSON.parse(localStorage.getItem('coins'));
-        // }
-        // else
-            // this.loadedCoins = this.$store.getters['crypto/getCoins'];
         this.loadcoin();
-       
-
-
-
     },
     methods:{
         async loadcoin(){
             try{
+                    this.loaderactive++;
                     const response = await fetch ('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false');
                     console.log(response);
                     const responseData = await response.json(); 
@@ -89,7 +67,10 @@ export default {
                             percent : crypto.price_change_percentage_24h>0?"+"+crypto.price_change_percentage_24h.toFixed(2):crypto.price_change_percentage_24h.toFixed(2),
                             market_cap : crypto.market_cap,
                             volume : crypto.total_volume,
-                            symbol: crypto.symbol.toUpperCase()
+                            symbol: crypto.symbol.toUpperCase(),
+                            circulating: crypto.circulating_supply,
+                            max_supply : crypto.max_supply,
+                            id:crypto.id
                         }
                         this.mainCoins.push(coin);
                         
@@ -103,9 +84,15 @@ export default {
                 catch(error){
                     console.log(error);
                 }
+                this.loaderactive--;
         },
         searched(event){
             console.log(event.target.value);
+            
+        },
+        openModal(selectedCoin){
+            this.selectedCoin = selectedCoin;
+            console.log(selectedCoin);
             
         }
     },
@@ -121,8 +108,7 @@ export default {
 </script>
 
 <style scoped>
-    .topMost{
-    }
+    
     .table{
         background-color: #000;
         color: white;
@@ -158,5 +144,8 @@ export default {
     .grid-item{
         width: 80%;
         margin: 0 auto;
+    }
+    .searchHead{
+        flex: unset;
     }
 </style>

@@ -1,7 +1,10 @@
 <template>
     <div style="overflow-x:hidden">
       <the-header></the-header>
-      <div class="d-flex justify-content-between topCards">
+      <div v-if="loaderactive!=0" class="d-flex justify-content-center">
+        <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
+      </div>
+      <div v-else class="d-flex justify-content-between topCards">
         <div>
           <div class="d-flex align-items-center mb-2">
             <img style="width:48px" class="mx-1" :src="chartspriceData['bitcoin'].image" alt="">
@@ -69,7 +72,9 @@
           </div>
         </div>
         <line-chart width="99%" height = "400px" loading="Loading..." :colors="['#6B4BEF','#CE57EA']" v-if="graphsData[1].name!=''&&graphsData[0].name!=''" :data="graphsData" />
-        <div v-else style="height:400px"></div>
+        <div v-else style="height:400px" class="d-flex justify-content-center align-items-center">
+                <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
+            </div>
       </base-card>
       <div class="price">
         <div class="d-flex justify-content-between mx-3 align-items-center">
@@ -94,6 +99,7 @@ import TheHeader from './TheHeader.vue'
     export default{
       data(){
         return{
+          loaderactive:0,
           loadedCoins2:[],
             mainCoins:[],
           cryptoCoin1:"bitcoin",
@@ -124,6 +130,7 @@ import TheHeader from './TheHeader.vue'
       components: { TheHeader, BaseCard, PriceGrid },
       methods:{
         async bitData(coin){
+          this.loaderactive++;
           var days= 10;
           var date = new Date();
           var last = new Date(date.getTime() - (days * 24 * 60 * 60 * 1000));
@@ -146,6 +153,7 @@ import TheHeader from './TheHeader.vue'
               maxi:maxi
             }
             this.chartsData[coin] = temp;
+            this.loaderactive--;
         },
         async graphData(coin,side){
           this.graphsData[0].name='';
@@ -155,7 +163,7 @@ import TheHeader from './TheHeader.vue'
           const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart/range?vs_currency=inr&from=${last.getTime()/1000}&to=${new Date().getTime()/1000}`);
           const responseData = await response.json();
           var temp={};
-          for (let index = 0; index < responseData.prices.length; index+=15) {
+          for (let index = 0; index < responseData.prices.length; index+=10) {
             temp[this.unixToDate(responseData.prices[index][0])]=responseData.prices[index][1];
           }
           // const tempobj = {
@@ -250,6 +258,7 @@ import TheHeader from './TheHeader.vue'
           
         },
         unixToDate(p){
+          // return new Date(p);
           let s = new Date(p).toString().substr(4,11);
           return s.substr(7,4)+"-"+(new Date(p).getMonth()+1)+"-"+new Date (p).getDate();
         }

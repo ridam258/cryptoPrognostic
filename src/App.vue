@@ -13,6 +13,7 @@
     
     // import TheHeader from './components/TheHeader.vue';
     import Nav from './components/Navbar.vue';
+    // import CoinDetail from './components/CoinDetail.vue';
     export default{
         data(){
             return{
@@ -27,6 +28,7 @@
         },
         components:{
             Nav,
+            // CoinDetail
             // TheHeader
         },
         created(){

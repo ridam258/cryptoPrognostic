@@ -11,11 +11,11 @@
         </div>
         <div class="d-flex align-items-center justify-content-between">
             <h6>Market Cap</h6>
-            <h5>{{coin.market_cap}}</h5>
+            <h5>₹{{coin.market_cap}}</h5>
         </div>
         <div class="d-flex align-items-center justify-content-between">
             <h6>Volume (24h)</h6>
-            <h5>{{coin.volume}}</h5>
+            <h5>₹{{coin.volume}}</h5>
         </div>
         <div class="first"></div>
         <div class="second"></div>

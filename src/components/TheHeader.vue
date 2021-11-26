@@ -1,12 +1,13 @@
 <template>
     <div class="allHead">
+        <div>
+            <img src="s" alt="">
+        </div>
         <div class="dashHead">
             <h2>Dashboard</h2>
             <p >{{this.time}}{{this.date}}</p>
         </div>
-        <div class="searchHead">
-            <div class="search"> <i class="fa fa-search"></i><input type="text" class="form-control" placeholder="Search for Crypto ">  </div>
-        </div>
+        
     </div>
 </template>
 
@@ -14,6 +15,7 @@
     export default{
         data(){
             return{
+                loader:0,
                 time:"",
                 date:""
             }
@@ -28,7 +30,7 @@
 
     .allHead{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         /* align-items: center; */
         padding: 2rem;
     }
@@ -36,7 +38,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        flex: 3;
+        /* flex: ; */
     }
  .search {
     position: relative;
