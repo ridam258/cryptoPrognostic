@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loaderactive!=0" class="d-flex justify-content-center">
+    <div v-if="loaderactive!=0" style="height:100vh" class="d-flex justify-content-center align-items-center">
         <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
       </div>
     <div v-else class="topMost">
@@ -50,6 +50,7 @@ export default {
     },
     methods:{
         async loadnews(){
+            this.loaderactive++;
             const response = await fetch("https://free-news.p.rapidapi.com/v1/search?q=crypto&lang=en", {
                 "method": "GET",
                 "headers": {
@@ -65,7 +66,7 @@ export default {
             this.finalArray = [...temp];
             console.log(this.finalArray);
             
-            
+            this.loaderactive--;
             
             
         }
