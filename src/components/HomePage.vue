@@ -1,11 +1,13 @@
 <template>
+
     <div style="overflow-x:hidden">
+      <coin-detail :selected="selectedCoin"></coin-detail>
       <the-header></the-header>
       <div v-if="loaderactive!=0" class="d-flex justify-content-center">
         <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
       </div>
       <div v-else class="d-flex justify-content-between topCards">
-        <div>
+        <div  data-bs-toggle="modal" data-bs-target="#exampleModal" @click="openModal(chartspriceData['bitcoin'])">
           <div class="d-flex align-items-center mb-2">
             <img style="width:48px" class="mx-1" :src="chartspriceData['bitcoin'].image" alt="">
             <h4 class="m-0">{{chartspriceData['bitcoin'].name}} {{ chartspriceData['bitcoin'].symbol}}</h4>
@@ -22,7 +24,7 @@
             </div>
           </base-card>
         </div>
-        <div>
+        <div data-bs-toggle="modal" data-bs-target="#exampleModal" @click="openModal(chartspriceData['ethereum'])">
           <div class="d-flex align-items-center mb-2">
             <img style="width:48px" class="mx-1" :src="chartspriceData['ethereum'].image" alt="">
             <h4 class="m-0">{{chartspriceData['ethereum'].name}} {{ chartspriceData['ethereum'].symbol}}</h4>
@@ -39,7 +41,7 @@
             </div>
           </base-card>
         </div>
-        <div>
+        <div data-bs-toggle="modal" data-bs-target="#exampleModal" @click="openModal(chartspriceData['dogecoin'])">
           <div class="d-flex align-items-center mb-2">
             <img style="width:48px" class="mx-1" :src="chartspriceData['dogecoin'].image" alt="">
             <h4 class="m-0">{{chartspriceData['dogecoin'].name}} {{ chartspriceData['dogecoin'].symbol}}</h4>
@@ -82,7 +84,7 @@
           <router-link to="/prices"><button class="viewButton">View All <img src="../assets/viewButton.png" alt=""></button></router-link>
         </div>
         <div class="grid-container">         
-                <div class="grid-item  is-justify-content-space-between" v-for="coin in loadedCoins2" :key="coin.name">
+                <div class="grid-item  is-justify-content-space-between"  data-bs-toggle="modal" data-bs-target="#exampleModal" v-for="coin in loadedCoins2" :key="coin.name" @click="openModal(coin)">
                     <price-grid :coin='coin'></price-grid>
                 </div>
             </div>
@@ -95,6 +97,7 @@
 <script>
 import BaseCard from './BaseCard.vue';
 import PriceGrid from './PriceGrid.vue';
+import CoinDetail from './CoinDetail.vue';
 import TheHeader from './TheHeader.vue'
     export default{
       data(){
@@ -125,9 +128,10 @@ import TheHeader from './TheHeader.vue'
             ethereum:{},
             dogecoin:{}
           },
+            selectedCoin:{}
         }
       },  
-      components: { TheHeader, BaseCard, PriceGrid },
+      components: { TheHeader, BaseCard, PriceGrid, CoinDetail },
       methods:{
         async bitData(coin){
           this.loaderactive++;
@@ -199,7 +203,9 @@ import TheHeader from './TheHeader.vue'
                             percent : element.price_change_percentage_24h>0?"+"+element.price_change_percentage_24h.toFixed(2):element.price_change_percentage_24h.toFixed(2),
                             market_cap : element.market_cap,
                             volume : element.total_volume,
-                            symbol: element.symbol.toUpperCase()
+                            symbol: element.symbol.toUpperCase(),
+                            circulating: element.circulating_supply,
+                            id:element.id
                         }
                         this.mainCoins.push(coin);
                         console.log(coin);
@@ -215,7 +221,9 @@ import TheHeader from './TheHeader.vue'
                             percent : element.price_change_percentage_24h>0?"+"+element.price_change_percentage_24h.toFixed(2):element.price_change_percentage_24h.toFixed(2),
                             market_cap : element.market_cap,
                             volume : element.total_volume,
-                            symbol: element.symbol.toUpperCase()
+                            symbol: element.symbol.toUpperCase(),
+                            circulating: element.circulating_supply,
+                            id:element.id
                         }
                 console.log(coin);
                   this.chartspriceData.bitcoin=coin;
@@ -229,7 +237,9 @@ import TheHeader from './TheHeader.vue'
                             percent : element.price_change_percentage_24h>0?"+"+element.price_change_percentage_24h.toFixed(2):element.price_change_percentage_24h.toFixed(2),
                             market_cap : element.market_cap,
                             volume : element.total_volume,
-                            symbol: element.symbol.toUpperCase()
+                            id:element.id,
+                            circulating: element.circulating_supply,
+                            symbol: element.symbol.toUpperCase(),
                         }
                 this.chartspriceData.ethereum=coin;
               }
@@ -242,6 +252,8 @@ import TheHeader from './TheHeader.vue'
                             percent : element.price_change_percentage_24h>0?"+"+element.price_change_percentage_24h.toFixed(2):element.price_change_percentage_24h.toFixed(2),
                             market_cap : element.market_cap,
                             volume : element.total_volume,
+                            id:element.id,
+                            circulating: element.circulating_supply,
                             symbol: element.symbol.toUpperCase()
                         }
                 this.chartspriceData.dogecoin=coin;
@@ -261,6 +273,11 @@ import TheHeader from './TheHeader.vue'
           // return new Date(p);
           let s = new Date(p).toString().substr(4,11);
           return s.substr(7,4)+"-"+(new Date(p).getMonth()+1)+"-"+new Date (p).getDate();
+        },
+        openModal(selectedCoin){
+            this.selectedCoin = selectedCoin;
+            console.log(selectedCoin);
+            
         }
       },
       watch:{

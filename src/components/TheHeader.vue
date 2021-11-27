@@ -1,7 +1,7 @@
 <template>
     <div class="allHead">
         <div>
-            <img src="s" alt="">
+            <img style="width:80%" src="../assets/Crypo.png" alt="">
         </div>
         <div class="dashHead">
             <h2>Dashboard</h2>
@@ -31,13 +31,14 @@
     .allHead{
         display: flex;
         justify-content: space-between;
-        /* align-items: center; */
-        padding: 2rem;
+        align-items: center;
+        padding:1rem 3rem;
+        margin-bottom: 2rem;
     }
     .dashHead{
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        /* align-items: flex-start; */
         /* flex: ; */
     }
  .search {

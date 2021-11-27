@@ -34,7 +34,7 @@
                     <h4>{{clickedCoin.circulating}} <span style="font-size:.8rem; color:lightgrey">{{clickedCoin.symbol}}</span></h4>    
                 </div>
             </div> 
-            <div v-if="loaderactive!=0" style="height:25vh;background-color:#111" class="d-flex justify-content-center align-items-center">
+            <div v-if="loaderactive!=0" style="height:50vh;background-color:#111" class="d-flex justify-content-center align-items-center">
                 <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
             </div>
             <div v-else class="grapharea">
