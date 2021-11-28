@@ -112,7 +112,7 @@ export default {
 }
 </script>
 <style scoped>
-a{
+    a{
         text-decoration: none;
         color: white;
     }
@@ -160,50 +160,52 @@ a{
         overflow-x:hidden;
         width: 100%;
         margin: 3rem 0;
-   }
-   .grid-container::-webkit-scrollbar{
-   width: 5px;
-}
-.filter h6{
-    /* border-right: 1px solid grey; */
-    color: white;
-    margin: 0;
-    padding: 0.5rem 1.6rem;
-    /* margin: 0 1rem; */
-    text-align: center;
-    border-right: 1px solid grey;
-    cursor: pointer;
-    /* border-radius: 25px; */
+    }
+    .grid-container::-webkit-scrollbar{
+        width: 5px;
+    }
+    .filter h6{
+        /* border-right: 1px solid grey; */
+        color: white;
+        margin: 0;
+        padding: 0.5rem 1.6rem;
+        /* margin: 0 1rem; */
+        text-align: center;
+        border-right: 1px solid grey;
+        cursor: pointer;
+        /* color: #8a6ff7; */
+        /* border-radius: 25px; */
 
-}
-.filter h6:hover{
+    }
+    .filter h6:hover{
 
-    color: lightgrey;
-    /* border-bottom: 1px solid grey; */
-    /* border-radius: 20px; */
-    transform: scale(1.1);
-    /* transition: .5s; */
-    transition: ease-in 0.3s;
-}
-.filter{
-    /* width: 90%; */
-    /* flex: 3; */
-    /* border: 1px solid grey;
-    border-top: 1px solid grey; */
-    /* justify-content: space-between; */
-    /* margin:0rem auto 3rem; */
-    /* padding: 2rem 0; */
+        color: lightgrey;
+        /* border-bottom: 1px solid grey; */
+        /* border-radius: 20px; */
+        transform: scale(1.1);
+        /* transition: .5s; */
+        transition: ease-in 0.3s;
+        color: #5c38ee;
+    }
+    .filter{
+        /* width: 90%; */
+        /* flex: 3; */
+        /* border: 1px solid grey;
+        border-top: 1px solid grey; */
+        /* justify-content: space-between; */
+        /* margin:0rem auto 3rem; */
+        /* padding: 2rem 0; */
 
-}
-.info{
-    /* width: 90%; */
-    text-align: center;
-    padding:1rem 2rem;
-    margin: 1rem auto;
-    font-family: 'Lato', sans-serif;
-    color: lightgrey;
-    font-size: 1.2rem;
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
-}
+    }
+    .info{
+        /* width: 90%; */
+        text-align: center;
+        padding:1rem 2rem;
+        margin: 1rem auto;
+        font-family: 'Lato', sans-serif;
+        color: lightgrey;
+        font-size: 1.2rem;
+        border-bottom: 1px solid grey;
+        border-top: 1px solid grey;
+    }
 </style>

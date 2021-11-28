@@ -327,6 +327,7 @@ import TheHeader from './TheHeader.vue'
     color: #3ec73e;
   }
   .topCards{
+    cursor: pointer;
     margin: 0 3rem;
   }
   .comparisonGraph{
@@ -348,9 +349,11 @@ import TheHeader from './TheHeader.vue'
     /* border-bottom: solid white 1px; */
     }
     .dd-1{
+      cursor: pointer;
       background-color: #6B4BEF;
     }
     .dd-2{
+      cursor: pointer;
       background-color: #CE57EA;
     }
     .grid-container {

@@ -29,6 +29,7 @@ export default {
 </script>
 <style scoped>
     .priceCard{
+        cursor: pointer;
         /* width: 100%; */
         background-color: #5C38EE;
         box-shadow: rgba(255, 255, 255, 0.1) 0px 4px 12px;

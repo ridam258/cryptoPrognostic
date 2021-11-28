@@ -1,11 +1,11 @@
 <template>
      <div id="mySidebar" class="sidebar" :class="{'decreasedWidth':mini,'increasedWidth':!mini}" @mouseover="toggleSidebar()"  @mouseout="toggleSidebar()">
-        <router-link to="/home" :class="{'miniLink':mini,'link':!mini}" href="#"><span><i class="material-icons">dashboard</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</span></span></router-link><br>
-        <router-link to="/prices"><span><i class="material-icons">monetization_on</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Prices</span></span></router-link><br>
-        <router-link to="/setAlert"><span><i class="material-icons">spa</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Set Alert</span></span>
+        <router-link active-class="active" to="/home" :class="{'link':mini}" href="#"><span><i class="material-icons">dashboard</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</span></span></router-link><br>
+        <router-link active-class="active" to="/prices"  :class="{'link':mini}"><span><i class="material-icons">monetization_on</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Prices</span></span></router-link><br>
+        <router-link active-class="active" to="/setAlert" :class="{'link':mini}"><span><i class="material-icons">spa</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Set Alert</span></span>
         </router-link><br>
         
-        <router-link to="/news"><span><i class="material-icons">article</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Crypto News</span></span>
+        <router-link active-class="active" to="/news" :class="{'link':mini}"><span><i class="material-icons">article</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Crypto News</span></span>
         </router-link><br>
         
     </div>
@@ -47,11 +47,12 @@
         body {
             font-family: "Lato", sans-serif;
         }
-        .link{
-            background-color: blue;
-            color: white;
+        .active{
+            background-color: #5c38ee;
         }
-        
+        .link{
+            background-color: transparent;
+        }
         .sidebar {
             height: 100vh;
             width: 85px;
@@ -71,13 +72,13 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 25px;
-            color: #818181;
+            color: #d6d6d6;
             display: block;
             transition: 0.3s;
         }
         
         .sidebar a:hover {
-            color: #f1f1f1;
+            color: #ffffff;
         }
         
         .sidebar .closebtn {

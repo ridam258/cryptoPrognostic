@@ -1,6 +1,6 @@
 <template>
 <div v-if="loaderactive!=0" style="height:100vh" class="d-flex justify-content-center align-items-center">
-        <vue-loaders name="ball-scale-multiple" color="lightgray" scale="2"></vue-loaders>
+        <vue-loaders name="ball-clip-rotate-multiple" color="lightgray" scale="2"></vue-loaders>
       </div>
 <div v-else>
     <!-- Button trigger modal -->
@@ -10,11 +10,16 @@
     <div class="topMost">
         <div class="allHead align-items-center">
         <div class="dashHead">
-            <h2 class="m-0">Current Price</h2>
+            <h1 class="m-0">Current Price</h1>
         </div>
         <div class="searchHead">
             <div class="search"> <i class="fa fa-search"></i><input v-model="searchingString" style="color:white" type="text" class="form-control" placeholder="Search for Crypto ">  </div>
         </div>
+        </div>
+                <div class="info">
+            <p>
+                This page holds the display of the current price. On click-over, the cards include the performance graph and respective percentage values.
+            </p>
         </div>
         <!-- <h1 style="display:none">{{loadedCoins2}}</h1> -->
         <div>
@@ -108,7 +113,9 @@ export default {
 </script>
 
 <style scoped>
-    
+    .allHead{
+        margin: 1rem 0;
+    }
     .table{
         background-color: #000;
         color: white;
@@ -147,5 +154,17 @@ export default {
     }
     .searchHead{
         flex: unset;
+        width: 350px;
+    }
+    .info{
+        /* width: 90%; */
+        text-align: center;
+        padding:1rem 2rem;
+        margin: 1rem auto;
+        font-family: 'Lato', sans-serif;
+        color: lightgrey;
+        font-size: 1.2rem;
+        border-bottom: 1px solid grey;
+        border-top: 1px solid grey;
     }
 </style>
