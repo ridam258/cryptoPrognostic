@@ -1,74 +1,5 @@
 <template>
     <div class="topMost">
-        <!-- <div class="d-flex align-items-center justify-content-around">
-            <div class="alertHead">
-                <h1>Price Alert</h1>
-                <h3>Get a profit alert every time and trace your crypto currency just right!</h3>
-            </div> -->
-            <!-- <div class="cryptoPhoto">
-                <img src="../assets/crypto2.jpg" alt="">
-            </div> -->
-        <!-- </div> -->
-        <!-- <div class="d-flex formParent">
-            <div class="formLeft">
-                <h3>Get a profit alert every time and trace your crypto currency just right!</h3>
-                <img style="width:90%" src="../assets/crypto4.jpg" alt="">
-            </div>
-            <div class="formRight">
-                <h2>Create Alert</h2>
-                <div class="d-flex justify-content-around">
-                    <h6 @click="priceClicked()" :class="{'bgBlue':radioValue}">By Price</h6>
-                    <h6 @click="percentClicked()" :class="{'bgBlue':!radioValue}">By Percentage</h6>
-                </div>
-                
-                <form @submit.prevent="submitForm()">
-                    <div class="d-flex justify-content-between" style="">
-                        <div style="display:inline">
-                            <label for="firstName"> First Name</label>
-                            <input type="text" id="firstName" class="text-line" v-model="firstName">
-                        </div>
-                        <div>
-                            <label for="lastName"> Last Name</label>
-                            <input type="text" id="lastName" class="text-line" v-model="lastName">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="email">Your Email</label>
-                        <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="email">
-                    </div>
-                    <div>
-                        <label for="coin">Your Crypto Currency</label>
-                        <select name="coin" id="coin" class="text-line" style="width:100% " v-model="cryptoCoin">
-                            <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.id">{{coins.name}}</option>
-                        </select>
-                    </div>
-                    <div v-if="radioValue">
-                        <label for="variationPrice">Price goes:</label>
-                        <select name="variation" id="variationPrice" class="text-line" style="width:100%" v-model="price">
-                            <option value="above"> Above</option>
-                            <option value="below">Below</option>
-                        </select>
-                    </div>
-                    <div v-else>
-                        <label for="variationPercent">Percentage goes:</label>
-                        <select name="variation" id="variationPercent" class="text-line" style="width:100%" v-model="percentage">
-                            <option value="above"> Above</option>
-                            <option value="below">Below</option>
-                        </select>
-                    </div>
-
-                    <div v-if="radioValue">
-                        <label for="price">Critical Value</label>
-                        <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%" v-model="criticalValuePrice">
-                    </div>
-                    <div v-else>
-                        <label for="percent">Critical Value</label>
-                        <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
-                    </div>
-                    <button type="submit" class="submitButton">Submit</button>
-                </form>
-            </div>
-        </div> -->
         <div class="left">
             <h1>Price Alert</h1>
             <div>
@@ -87,11 +18,11 @@
                 
                 <form v-if="!unsublcribe" @submit.prevent="submitForm()">
                     <div class="d-flex justify-content-between" style="">
-                        <div style="display:inline">
+                        <div style="width:40%">
                             <label for="firstName"> First Name</label>
                             <input type="text" id="firstName" class="text-line" v-model="firstName">
                         </div>
-                        <div>
+                        <div style="width:40%" >
                             <label for="lastName"> Last Name</label>
                             <input type="text" id="lastName" class="text-line" v-model="lastName">
                         </div>
@@ -106,7 +37,7 @@
                             <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.id">{{coins.name}}</option>
                         </select>
                     </div>
-                    <div v-if="radioValue">
+                    <div v-if="radioValue===0">
                         <label for="variationPrice">Price goes:</label>
                         <select name="variation" id="variationPrice" class="text-line" style="width:100%" v-model="price">
                             <option value="above"> Above</option>
@@ -121,7 +52,7 @@
                         </select>
                     </div>
 
-                    <div v-if="radioValue">
+                    <div v-if="radioValue===0">
                         <label for="price">Critical Value</label>
                         <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%" v-model="criticalValuePrice">
                     </div>
@@ -129,6 +60,7 @@
                         <label for="percent">Critical Value</label>
                         <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
                     </div>
+                    <p style="font-size:1rem; color:red;font-family: 'Lato', sans-serif" class="m-0 py-1" v-if="!formValidate">{{errorString}}</p>
                     <button type="submit" class="submitButton">Submit</button>
                     <!-- <button class="submitButton unsub">Unsubscribe</button> -->
                 </form>
@@ -146,17 +78,11 @@
 
 
 <script>
-    import axios from 'axios';
+    // import axios from 'axios';
     // import APIURl from '../variable.js'
 export default {
     data(){
         return{
-            formData:{
-                title:'',
-                body:'',
-                userId:'',
-
-            },
                 pageHead:"Create Alert",
                 unsublcribe:false,
                 radioValue:0,
@@ -167,13 +93,46 @@ export default {
                 price:'',
                 criticalValuePrice:'',
                 percentage:'',
-                criticalValuePercent:''
+                criticalValuePercent:'',
+                formValidate:true,
+                errorString : 'Something went wrong! Check the input fields you have filled.'
 
         }
     },
     methods:{
-
+        formReset(){
+            this.firstName='';
+            this.lastName='';
+            this.email='';
+            this.cryptoCoin='';
+            this.price='';
+            this.criticalValuePrice='';
+            this.percentage='';
+            this.criticalValuePercent=''
+        },
+        formValidation(){
+            let temp1=true,temp2=true;
+            if(this.firstName !== '' && this.lastName !== '' && this.email !== '' &&this.cryptoCoin!==''){
+                temp1 = true;
+            }
+            else{
+                temp1 = false;
+            }
+            if((this.price!==''&&this.criticalValuePrice!=='')||(this.percentage!==''&&this.criticalValuePercent!=='')){
+                temp2 = true;
+            }
+            else{
+                temp2 = false;
+            }
+            if(temp1&&temp2){
+                this.formValidate = true;
+            }
+            else{
+                this.formValidate = false;
+            }
+        },
         priceClicked(){
+            this.formReset();
             this.pageHead = "Create Alert"
             this.unsublcribe=false;
             this.radioValue = 0;
@@ -181,31 +140,44 @@ export default {
             
         },
         percentClicked(){
-            this.pageHead = "Create Alert"
+            this.formReset();
+            this.pageHead = "Create Alert";
             this.unsublcribe=false;
             this.radioValue = 1;
             console.log('percent');
             
         },
         unsubscribeClicked(){
-            this.pageHead = "Unsubscribe Alert"
+            this.formReset();
+            this.pageHead = "Unsubscribe Alert";
             this.unsublcribe=true;
             this.radioValue=2;
         },
         submitForm(){
-            const formData = {
-                firstName : this.firstName ,
-                lastName : this.lastName,
-                email:this.email,
-                cryptoCoin:this.cryptoCoin,
-                price:this.price,
-                criticalValuePrice : this.criticalValuePrice,
-                percentage:this.percentage,
-                criticalValuePercent:this.criticalValuePercent
+            this.formValidation();
+            if(this.formValidate){
+                console.log(this.formValidate);
+                
             }
-            console.log(formData);
+            else{
+                console.log(this.formValidate);
+                return;
+                
+            }
+            // const formData = {
+            //     firstName : this.firstName ,
+            //     lastName : this.lastName,
+            //     email:this.email,
+            //     cryptoCoin:this.cryptoCoin,
+            //     price:this.price,
+            //     criticalValuePrice : this.criticalValuePrice,
+            //     percentage:this.percentage,
+            //     criticalValuePercent:this.criticalValuePercent
+            // }
+            // console.log(formData);
             
-            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            // axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            this.formReset();
         }
 
         
@@ -227,6 +199,12 @@ export default {
 </script>
 
 <style scoped>
+    input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
+  -webkit-text-fill-color: white !important;
+}
     .topMost{
         /* padding:2rem 2rem; */
         display: flex;
@@ -263,31 +241,7 @@ export default {
         line-height: 35px;
         text-align: center;
     }
-    .cryptoPhoto img{
-        flex:1;
-        width: 70%;
-        border: 0px;
-        border-radius: 50px;
-    }
-    .formHead{
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        background-color: #fff;
-        padding: 2rem;
-        margin: 2rem auto;
-        width: 80%;
-        color: white;
-        background-image: url(../assets/crypto3.jpg);
-        background-size: cover;
 
-    }
-    .formHead h3{
-        text-align: center;
-    }
-    .formParent{
-        border: 0px solid white;
-        border-radius: 25px;
-        margin: 2rem auto 0;
-    }
     form{
         padding: 0rem 5rem 0rem;
     }
@@ -333,6 +287,8 @@ export default {
     }
     input{
         padding: 0.5rem;
+        color: white;
+        width: 100%;
     }
     select{
         padding: 0.5rem;
@@ -371,7 +327,7 @@ export default {
         font-weight: bold;
         border: 0px;
         border-radius: 12px;
-        margin: 1.5rem 0;
+        margin: 1rem 0;
     }
     .unsub{
         margin: 0 2rem;

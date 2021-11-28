@@ -104,7 +104,7 @@
             margin-left: 100px;
         }
         .increasedWidth{
-            width: 250px;
+            width: 270px;
         }
         .decreasedWidth{
             width: 80px;
