@@ -40,6 +40,9 @@ export default {
     }
     .priceCard img{
         background-color: #fff;
+        border: 0;
+        border-radius: 5px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
     h6{
         margin: 0;

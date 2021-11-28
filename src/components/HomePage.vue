@@ -356,6 +356,9 @@ import TheHeader from './TheHeader.vue'
       cursor: pointer;
       background-color: #CE57EA;
     }
+    /* option{
+      background-color: black;
+    } */
     .grid-container {
        justify-items: center;
         display: inline-grid;
@@ -388,7 +391,7 @@ import TheHeader from './TheHeader.vue'
       margin: 0 .5rem;
     }
     .price{
-      margin: 3rem;
+      margin: 3rem 3rem 0;
 
     }
   

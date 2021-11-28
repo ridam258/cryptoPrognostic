@@ -2,7 +2,7 @@
      <div id="mySidebar" class="sidebar" :class="{'decreasedWidth':mini,'increasedWidth':!mini}" @mouseover="toggleSidebar()"  @mouseout="toggleSidebar()">
         <router-link active-class="active" to="/home" :class="{'link':mini}" href="#"><span><i class="material-icons">dashboard</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</span></span></router-link><br>
         <router-link active-class="active" to="/prices"  :class="{'link':mini}"><span><i class="material-icons">monetization_on</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Prices</span></span></router-link><br>
-        <router-link active-class="active" to="/setAlert" :class="{'link':mini}"><span><i class="material-icons">spa</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Set Alert</span></span>
+        <router-link active-class="active" to="/setAlert" :class="{'link':mini}"><span><i class="material-icons">notifications_active</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Set Alert</span></span>
         </router-link><br>
         
         <router-link active-class="active" to="/news" :class="{'link':mini}"><span><i class="material-icons">article</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Crypto News</span></span>

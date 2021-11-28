@@ -17,8 +17,8 @@
                 <h6 @click="loadnews('crypto headlines')">
                     Headlines
                 </h6>
-                <h6 @click="loadnews('elon musk')">
-                    Elon Musk
+                <h6 @click="loadnews('crypto india')">
+                    India Crypto
                 </h6>
                 <h6 @click="loadnews('dogecoin')">
                     Dogecoin
@@ -168,7 +168,7 @@ export default {
         /* border-right: 1px solid grey; */
         color: white;
         margin: 0;
-        padding: 0.5rem 1.6rem;
+        padding: 0.5rem 1.5rem;
         /* margin: 0 1rem; */
         text-align: center;
         border-right: 1px solid grey;

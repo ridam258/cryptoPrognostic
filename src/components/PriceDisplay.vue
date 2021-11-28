@@ -8,18 +8,18 @@
 <!-- Modal -->
     <coin-detail :selected="selectedCoin"></coin-detail>
     <div class="topMost">
-        <div class="allHead align-items-center">
+        <div class="allHead align-items-start">
         <div class="dashHead">
             <h1 class="m-0">Current Price</h1>
+            <p class="my-2 info" style="width:60%">
+                This page holds the display of the current price. On click-over, the cards include the performance graph and respective percentage values.
+            </p>
         </div>
         <div class="searchHead">
             <div class="search"> <i class="fa fa-search"></i><input v-model="searchingString" style="color:white" type="text" class="form-control" placeholder="Search for Crypto ">  </div>
         </div>
         </div>
                 <div class="info">
-            <p>
-                This page holds the display of the current price. On click-over, the cards include the performance graph and respective percentage values.
-            </p>
         </div>
         <!-- <h1 style="display:none">{{loadedCoins2}}</h1> -->
         <div>
@@ -143,7 +143,7 @@ export default {
         overflow-y: auto;
         overflow-x:hidden;
         width: 100%;
-        margin: 3rem 0;
+        margin: 1rem 0;
    }
    .grid-container::-webkit-scrollbar{
    width: 5px;
@@ -154,17 +154,18 @@ export default {
     }
     .searchHead{
         flex: unset;
+        /* width: 100%; */
         width: 350px;
     }
     .info{
         /* width: 90%; */
-        text-align: center;
-        padding:1rem 2rem;
-        margin: 1rem auto;
+        /* text-align: center; */
+        /* padding:1rem 2rem;
+        margin: 1rem auto; */
         font-family: 'Lato', sans-serif;
         color: lightgrey;
         font-size: 1.2rem;
-        border-bottom: 1px solid grey;
-        border-top: 1px solid grey;
+        /* border-bottom: 1px solid grey; */
+        /* border-top: 1px solid grey; */
     }
 </style>

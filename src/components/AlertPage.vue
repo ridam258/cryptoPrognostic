@@ -10,7 +10,7 @@
         <div class="right">
             <div class="formRight">
                 <h2>{{pageHead}}</h2>
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around forms">
                     <h6 @click="priceClicked()" :class="{'bgBlue':radioValue==0}">By Price</h6>
                     <h6 @click="percentClicked()" :class="{'bgBlue':radioValue==1}">By Percentage</h6>
                     <h6 @click="unsubscribeClicked()" :class="{'bgBlue':radioValue==2}">Unsubscribe</h6>
@@ -336,5 +336,10 @@ select:-webkit-autofill {
     }
     .submitButton :hover{
         transform: scale(2.1);
+    }
+    .forms h6{
+        border: 1px solid #5c38ee;
+        padding: .5rem 1rem;
+        border-radius: 12px;
     }
 </style>
