@@ -13,7 +13,7 @@
             <h4 class="m-0">{{chartspriceData['bitcoin'].name}} {{ chartspriceData['bitcoin'].symbol}}</h4>
           </div>
           <base-card class="d-flex flex-row">
-            <line-chart :curve="true" :data="chartsData['bitcoin']" :min="minmaxData['bitcoin'].mini" :max="minmaxData['bitcoin'].maxi" :colors="['#F7931A','red']" height="120px" width="60%"></line-chart>
+            <line-chart :curve="true" :data="chartsData['bitcoin']" :min="minmaxData['bitcoin'].mini" :max="minmaxData['bitcoin'].maxi" :colors="['#F7931A','red']" height="120px" width="207px"></line-chart>
             <div style="align-self:center" class="cardContent">
               <h5>₹{{chartspriceData['bitcoin'].price}}</h5>
               <div class="d-flex align-items-center">
@@ -30,7 +30,7 @@
             <h4 class="m-0">{{chartspriceData['ethereum'].name}} {{ chartspriceData['ethereum'].symbol}}</h4>
           </div>
           <base-card class="d-flex flex-row">
-            <line-chart :data="chartsData['ethereum']" :min="minmaxData['ethereum'].mini" :max="minmaxData['ethereum'].maxi" :colors="['#6C7398']" height="120px" width="60%"></line-chart>
+            <line-chart :data="chartsData['ethereum']" :min="minmaxData['ethereum'].mini" :max="minmaxData['ethereum'].maxi" :colors="['#6C7398']" height="120px" width="207px"></line-chart>
             <div style="align-self:center" class="cardContent">
               <h5>₹{{chartspriceData['ethereum'].price}}</h5>
               <div class="d-flex align-items-center">
@@ -47,7 +47,7 @@
             <h4 class="m-0">{{chartspriceData['dogecoin'].name}} {{ chartspriceData['dogecoin'].symbol}}</h4>
           </div>
           <base-card class="d-flex flex-row">
-            <line-chart :curve="true" :data="chartsData['dogecoin']" :min="minmaxData['dogecoin'].mini" :max="minmaxData['dogecoin'].maxi" :colors="['#F7931A']" height="120px" width="60%" class=""></line-chart>
+            <line-chart :curve="true" :data="chartsData['dogecoin']" :min="minmaxData['dogecoin'].mini" :max="minmaxData['dogecoin'].maxi" :colors="['#F7931A']" height="120px" width="207px" class=""></line-chart>
             <div style="align-self:center" class="cardContent">
               <h5>₹{{chartspriceData['dogecoin'].price}}</h5>
               <div class="d-flex align-items-center">
