@@ -7,7 +7,7 @@
             </div>
             <div class="secondinner" @click="scrollDown()">
                 <h5>
-                    About Us
+                    What We Are
                 </h5>
                 <span><i class="material-icons">expand_circle_down</i></span>
             </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="thirdSection">
-            <h1>Lorem, ipsum dolor.</h1>
+            <!-- <h1></h1> -->
             <h3>We at CryptoPrognostic ensures that you never miss a profit bell by giving a wide awake at the correct time always!
                 Here at CryptoPrognostic, we predict your investments to match the best profit you can make, and alert you the right time to gain as much as you can. <br><br>
                 We keep a keen look over more than 100+ cryptocurrencies across the world and alert you to the right moment to invest and secure your gain in it.

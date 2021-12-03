@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="my-2 px-3">
                     <div class="d-flex align-items-center" v-for="alert in unsubcribingArray" :key="alert._id">
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div>
-                        <button @click="deleteList()" class="deleteButton">Delete</button>
+                        <button data-bs-dismiss="modal" data-bs-target="#exampleModal" @click="deleteList()" class="deleteButton">Delete</button>
                     </div>
                 </div>    
             </div>
@@ -126,7 +126,8 @@ export default {
     },
     methods:{
         deleteList(){
-            
+            axios.post('http://localhost:9000/users/unsubscribe',{choices:this.returningArray}).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            this.emailunsubscribe = '';
         },
         inputChanged(id){
             if(this.returningArray.findIndex(ids=>ids===id)!=-1){

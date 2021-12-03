@@ -84,8 +84,6 @@ export default {
         },
         unixToDate(p){
             return new Date(p);
-        //   let s = new Date(p).toString().substr(4,11);
-        //   return s.substr(7,4)+"-"+(new Date(p).getMonth()+1)+"-"+new Date (p).getDate();
         }
     },
     mounted(){
