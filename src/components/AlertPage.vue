@@ -12,6 +12,9 @@
                         <div v-if="alert.price!=''">
                             <h6 class="my-2 mx-3">Alert for {{alert.cryptoCoin.toUpperCase()}} if price goes {{alert.price.toUpperCase()}} {{alert.criticalValuePrice}}.</h6>
                         </div>
+                        <div v-else>
+                            <h6 class="my-2 mx-3">Alert for {{alert.cryptoCoin.toUpperCase()}} if percentage goes {{alert.percentage.toUpperCase()}} {{alert.criticalValuePercent}}%.</h6>
+                        </div>
                     </div>
                     <div>
                         <button data-bs-dismiss="modal" data-bs-target="#exampleModal" @click="deleteList()" class="deleteButton">Delete</button>

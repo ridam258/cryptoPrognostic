@@ -14,8 +14,8 @@
         </div>
         <div class="secondSection">
             <div>
-                <h1>Lorem ipsum dolor sit.</h1>
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+                <h1>In A Nutshell</h1>
+                <h2>All about our features and what we do.</h2>
             </div>
             <div class="d-flex justify-content-around">
                 <div class="priceCard">
