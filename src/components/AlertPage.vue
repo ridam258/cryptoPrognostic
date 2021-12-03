@@ -129,7 +129,7 @@ export default {
     },
     methods:{
         deleteList(){
-            axios.post('http://localhost:9000/users/unsubscribe',{choices:this.returningArray}).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            axios.post('https://crypto-depoly.herokuapp.com/users/unsubscribe',{choices:this.returningArray}).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
             this.emailunsubscribe = '';
         },
         inputChanged(id){
@@ -147,7 +147,7 @@ export default {
             }
         },
         unsubscribe(){
-            axios.get(`http://localhost:9000/users/${this.emailunsubscribe}`).then((reponse)=>{
+            axios.get(`https://crypto-depoly.herokuapp.com/users/${this.emailunsubscribe}`).then((reponse)=>{
                 console.log(reponse.data);
                 this.unsubcribingArray = reponse.data;
             }).catch((error)=>console.log(error));
