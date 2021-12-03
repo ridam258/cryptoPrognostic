@@ -1,76 +1,98 @@
 <template>
-    <div class="topMost">
-        <div class="left">
-            <h1>Price Alert</h1>
-            <div>
-                <h5>Get a profit alert every time and trace your crypto currency just right!</h5>
-                <img style="width:99.9%" src="../assets/alertside6.webp" alt="">
+    <div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="my-2 px-3">
+                    <div class="d-flex align-items-center" v-for="alert in unsubcribingArray" :key="alert._id">
+                        <input class="mx-2" style="width:unset; font-size:48px" type="checkbox" id="alert" name="alert" @change="inputChanged(alert._id)" :value="alert._id">
+                        <div v-if="alert.price!=''">
+                            <h6 class="my-2 mx-3">Alert for {{alert.cryptoCoin.toUpperCase()}} if price goes {{alert.price.toUpperCase()}} {{alert.criticalValuePrice}}.</h6>
+                        </div>
+                    </div>
+                    <div>
+                        <button @click="deleteList()" class="deleteButton">Delete</button>
+                    </div>
+                </div>    
             </div>
         </div>
-        <div class="right">
-            <div class="formRight">
-                <h2>{{pageHead}}</h2>
-                <div class="d-flex justify-content-around forms">
-                    <h6 @click="priceClicked()" :class="{'bgBlue':radioValue==0}">By Price</h6>
-                    <h6 @click="percentClicked()" :class="{'bgBlue':radioValue==1}">By Percentage</h6>
-                    <h6 @click="unsubscribeClicked()" :class="{'bgBlue':radioValue==2}">Unsubscribe</h6>
+        </div>
+        <div class="topMost">
+            <div class="left">
+                <h1>Price Alert</h1>
+                <div>
+                    <h6>Get a profit alert every time and trace your crypto currency just right! Fill the given form to get email notifications from us.</h6>
+                    <img style="width:99.9%" src="../assets/alertside6.webp" alt="">
                 </div>
-                
-                <form v-if="!unsublcribe" @submit.prevent="submitForm()">
-                    <div class="d-flex justify-content-between" style="">
-                        <div style="width:40%">
-                            <label for="firstName"> First Name</label>
-                            <input type="text" id="firstName" class="text-line" v-model="firstName">
+            </div>
+            <div class="right">
+                <div class="formRight">
+                    <h2>{{pageHead}}</h2>
+                    <div class="d-flex justify-content-around forms">
+                        <h6 @click="priceClicked()" :class="{'bgBlue':radioValue==0}">By Price</h6>
+                        <h6 @click="percentClicked()" :class="{'bgBlue':radioValue==1}">By Percentage</h6>
+                        <h6 @click="unsubscribeClicked()" :class="{'bgBlue':radioValue==2}">Unsubscribe</h6>
+                    </div>
+                    
+                    <form v-if="!unsublcribe" @submit.prevent="submitForm()">
+                        <div class="d-flex justify-content-between" style="">
+                            <div style="width:40%">
+                                <label for="firstName"> First Name</label>
+                                <input type="text" id="firstName" class="text-line" v-model="firstName">
+                            </div>
+                            <div style="width:40%" >
+                                <label for="lastName"> Last Name</label>
+                                <input type="text" id="lastName" class="text-line" v-model="lastName">
+                            </div>
                         </div>
-                        <div style="width:40%" >
-                            <label for="lastName"> Last Name</label>
-                            <input type="text" id="lastName" class="text-line" v-model="lastName">
+                        <div>
+                            <label for="email">Your Email</label>
+                            <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="email">
                         </div>
-                    </div>
-                    <div>
-                        <label for="email">Your Email</label>
-                        <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="email">
-                    </div>
-                    <div>
-                        <label for="coin">Your Crypto Currency</label>
-                        <select name="coin" id="coin" class="text-line" style="width:100% " v-model="cryptoCoin">
-                            <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.id">{{coins.name}}</option>
-                        </select>
-                    </div>
-                    <div v-if="radioValue===0">
-                        <label for="variationPrice">Price goes:</label>
-                        <select name="variation" id="variationPrice" class="text-line" style="width:100%" v-model="price">
-                            <option value="above"> Above</option>
-                            <option value="below">Below</option>
-                        </select>
-                    </div>
-                    <div v-else>
-                        <label for="variationPercent">Percentage goes:</label>
-                        <select name="variation" id="variationPercent" class="text-line" style="width:100%" v-model="percentage">
-                            <option value="above"> Above</option>
-                            <option value="below">Below</option>
-                        </select>
-                    </div>
+                        <div>
+                            <label for="coin">Your Crypto Currency</label>
+                            <select name="coin" id="coin" class="text-line" style="width:100% " v-model="cryptoCoin">
+                                <option v-for="coins in loadedCoins" :key="coins.name" :value="coins.id">{{coins.name}}</option>
+                            </select>
+                        </div>
+                        <div v-if="radioValue===0">
+                            <label for="variationPrice">Price goes:</label>
+                            <select name="variation" id="variationPrice" class="text-line" style="width:100%" v-model="price">
+                                <option value="above"> Above</option>
+                                <option value="below">Below</option>
+                            </select>
+                        </div>
+                        <div v-else>
+                            <label for="variationPercent">Percentage goes:</label>
+                            <select name="variation" id="variationPercent" class="text-line" style="width:100%" v-model="percentage">
+                                <option value="above"> Above</option>
+                                <option value="below">Below</option>
+                            </select>
+                        </div>
 
-                    <div v-if="radioValue===0">
-                        <label for="price">Critical Value</label>
-                        <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%" v-model="criticalValuePrice">
-                    </div>
-                    <div v-else>
-                        <label for="percent">Critical Value</label>
-                        <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
-                    </div>
-                    <p style="font-size:1rem; color:red;font-family: 'Lato', sans-serif" class="m-0 py-1" v-if="!formValidate">{{errorString}}</p>
-                    <button type="submit" class="submitButton">Submit</button>
-                    <!-- <button class="submitButton unsub">Unsubscribe</button> -->
-                </form>
-                <form v-else class="my-5 mx-4">
-                    <div>
-                        <label for="email">Your Email</label>
-                        <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="email">
-                    </div>
-                    <button type="submit" class="submitButton">Submit</button>
-                </form>
+                        <div v-if="radioValue===0">
+                            <label for="price">Critical Value</label>
+                            <input type="text" id="price" placeholder="0.00 in INR" class="text-line" style="width:100%" v-model="criticalValuePrice">
+                        </div>
+                        <div v-else>
+                            <label for="percent">Critical Value</label>
+                            <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
+                        </div>
+                        <p style="font-size:1rem; color:red;font-family: 'Lato', sans-serif" class="m-0 py-1" v-if="!formValidate">{{errorString}}</p>
+                        <button type="submit" class="submitButton">Submit</button>
+                        <!-- <button class="submitButton unsub">Unsubscribe</button> -->
+                    </form>
+                    <form @submit.prevent="unsubscribe()" v-else class="my-5 mx-4">
+                        <div>
+                            <label for="email">Your Email</label>
+                            <input type="email" name="email" id="email" class="text-line" style="width:100%" v-model="emailunsubscribe">
+                        </div>
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="submitButton">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -78,11 +100,12 @@
 
 
 <script>
-    // import axios from 'axios';
+    import axios from 'axios';
     // import APIURl from '../variable.js'
 export default {
     data(){
         return{
+                emailunsubscribe:'',
                 pageHead:"Create Alert",
                 unsublcribe:false,
                 radioValue:0,
@@ -95,11 +118,37 @@ export default {
                 percentage:'',
                 criticalValuePercent:'',
                 formValidate:true,
-                errorString : 'Something went wrong! Check the input fields you have filled.'
+                errorString : 'Something went wrong! Check the input fields you have filled.',
+                unsubcribingArray:[],
+                returningArray:[]
 
         }
     },
     methods:{
+        deleteList(){
+            
+        },
+        inputChanged(id){
+            if(this.returningArray.findIndex(ids=>ids===id)!=-1){
+                this.returningArray.splice(this.returningArray.findIndex(ids=>ids===id),1);
+            }
+            else
+            this.returningArray.push(id);
+            console.log(this.returningArray);
+            for (let index = 0; index < this.returningArray.length; index++) {
+                const element = this.returningArray[index];
+                console.log(element);
+                
+                
+            }
+        },
+        unsubscribe(){
+            axios.get(`http://localhost:9000/users/${this.emailunsubscribe}`).then((reponse)=>{
+                console.log(reponse.data);
+                this.unsubcribingArray = reponse.data;
+            }).catch((error)=>console.log(error));
+            
+        },
         formReset(){
             this.firstName='';
             this.lastName='';
@@ -164,19 +213,19 @@ export default {
                 return;
                 
             }
-            // const formData = {
-            //     firstName : this.firstName ,
-            //     lastName : this.lastName,
-            //     email:this.email,
-            //     cryptoCoin:this.cryptoCoin,
-            //     price:this.price,
-            //     criticalValuePrice : this.criticalValuePrice,
-            //     percentage:this.percentage,
-            //     criticalValuePercent:this.criticalValuePercent
-            // }
-            // console.log(formData);
+            const formData = {
+                firstName : this.firstName ,
+                lastName : this.lastName,
+                email:this.email,
+                cryptoCoin:this.cryptoCoin,
+                price:this.price,
+                criticalValuePrice : this.criticalValuePrice,
+                percentage:this.percentage,
+                criticalValuePercent:this.criticalValuePercent
+            }
+            console.log(formData);
             
-            // axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
             this.formReset();
         }
 
@@ -199,12 +248,26 @@ export default {
 </script>
 
 <style scoped>
+    .modal-dialog{
+        max-width: unset;
+        width: 40%;
+        margin: auto auto;
+        display: flex;
+        /* height: 100vh; */
+        align-items: space-around;
+    }
+    .modal-content{
+        margin: 2rem 0;
+        /* background-color: #111; */
+        color: #000;
+        border: 0;
+    }
     input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
-  -webkit-text-fill-color: white !important;
-}
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
+        -webkit-text-fill-color: white !important;
+    }
     .topMost{
         /* padding:2rem 2rem; */
         display: flex;
@@ -342,4 +405,14 @@ select:-webkit-autofill {
         padding: .5rem 1rem;
         border-radius: 12px;
     }
+    .deleteButton{
+        padding: .2rem 1rem;
+        border: 3px solid #5c38ee;
+        border-radius: 12px;
+        background-color: #5c38ee;
+        color: white;
+        margin: 1rem 0;
+
+    }
+
 </style>

@@ -7,6 +7,8 @@
         
         <router-link active-class="active" to="/news" :class="{'link':mini}"><span><i class="material-icons">article</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;Crypto News</span></span>
         </router-link><br>
+        <router-link active-class="active" to="/about" :class="{'link':mini}"><span><i class="material-icons">info</i><span class="icon-text">&nbsp;&nbsp;&nbsp;&nbsp;About Us</span></span>
+        </router-link><br>
         
     </div>
 
