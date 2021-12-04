@@ -85,6 +85,7 @@
                             <input type="text" id="percent" placeholder="Integer value 1 to 100" class="text-line" style="width:100%" v-model="criticalValuePercent">
                         </div>
                         <p style="font-size:1rem; color:red;font-family: 'Lato', sans-serif" class="m-0 py-1" v-if="!formValidate">{{errorString}}</p>
+                        <p style="font-size:1rem; color:lime;font-family: 'Lato', sans-serif" class="m-0 py-1" v-if="submitted">Submitted Successfully</p>
                         <button type="submit" class="submitButton">Submit</button>
                         <!-- <button class="submitButton unsub">Unsubscribe</button> -->
                     </form>
@@ -123,7 +124,8 @@ export default {
                 formValidate:true,
                 errorString : 'Something went wrong! Check the input fields you have filled.',
                 unsubcribingArray:[],
-                returningArray:[]
+                returningArray:[],
+                submitted:false
 
         }
     },
@@ -229,8 +231,9 @@ export default {
             }
             console.log(formData);
             
-            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>{console.log(reponse.data);alert("submitted successfully")}).catch((error)=>console.log(error));
+            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>{console.log(reponse.data);}).catch((error)=>console.log(error));
             this.formReset();
+            this.submitted = true;
 
         }
 
@@ -246,6 +249,7 @@ export default {
     },
     created(){
         console.log(this.loadedCoins);
+        this.submitted = false;
         
     },
 
