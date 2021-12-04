@@ -187,6 +187,7 @@ export default {
             }
         },
         priceClicked(){
+            this.submitted=false;
             this.formReset();
             this.pageHead = "Create Alert"
             this.unsublcribe=false;
@@ -195,6 +196,7 @@ export default {
             
         },
         percentClicked(){
+            this.submitted=false;
             this.formReset();
             this.pageHead = "Create Alert";
             this.unsublcribe=false;
@@ -203,6 +205,7 @@ export default {
             
         },
         unsubscribeClicked(){
+            this.submitted = false;
             this.formReset();
             this.pageHead = "Unsubscribe Alert";
             this.unsublcribe=true;
