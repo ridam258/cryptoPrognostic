@@ -229,8 +229,9 @@ export default {
             }
             console.log(formData);
             
-            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>console.log(reponse.data)).catch((error)=>console.log(error));
+            axios.post('https://crypto-depoly.herokuapp.com/users',formData).then((reponse)=>{console.log(reponse.data);alert("submitted successfully")}).catch((error)=>console.log(error));
             this.formReset();
+
         }
 
         
